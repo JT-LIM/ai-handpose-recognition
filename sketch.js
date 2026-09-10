@@ -447,7 +447,9 @@ async function connectBluetooth() {
     rxCharacteristic = await service.getCharacteristic(UART_RX_UUID);
     bluetoothDevice.addEventListener("gattserverdisconnected", onDisconnected);
     isConnected = true;
-    bluetoothStatus = "연결됨: " + bluetoothDevice.name;
+    // Extract device ID from brackets (e.g., "BBC micro:bit [XXXXX]" -> "XXXXX")
+    const deviceId = bluetoothDevice.name.match(/\[(.*?)\]/)?.[1] || bluetoothDevice.name;
+    bluetoothStatus = "연결됨: " + deviceId;
     updateBluetoothStatusUI(true);
   } catch (error) {
     console.error(error);
