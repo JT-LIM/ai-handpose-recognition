@@ -380,14 +380,22 @@ function updateListUI() {
     trainingList.html('<div class="empty-msg">아직 학습된 데이터가 없습니다.</div>');
     return;
   }
+  const labelDisplayMap = {
+    "forward": "⬆️ Forward (앞으로)",
+    "backward": "⬇️ Backward (뒤로)",
+    "left": "⬅️ Left (왼쪽)",
+    "right": "➡️ Right (오른쪽)",
+    "stop": "⏹️ Stop (정지)"
+  };
   for (const label in classes) {
     const li   = createDiv().addClass("list-item");
     const left = createDiv().addClass("list-item-left badge-label");
     left.attribute("data-label", label);
-    createSpan(label).parent(left);
+    createSpan(labelDisplayMap[label] || label).parent(left);
     createSpan(`${classes[label]} data`).addClass("badge-count").parent(left);
     left.parent(li);
-    const delBtn = createButton("X").addClass("delete-btn");
+    const delBtn = createButton("✕").addClass("delete-btn");
+    delBtn.attribute("title", "삭제");
     delBtn.mousePressed(() => deleteClass(label));
     delBtn.parent(li);
     li.parent(trainingList);

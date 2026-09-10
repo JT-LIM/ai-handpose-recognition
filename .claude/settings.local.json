@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(dir /s /b \"C:\\\\Users\\\\user\\\\Downloads\\\\ai_handpose_recognition-main\\\\ai_handpose_recognition-main\")"
+      "Bash(dir /s /b \"C:\\\\Users\\\\user\\\\Downloads\\\\ai_handpose_recognition-main\\\\ai_handpose_recognition-main\")",
+      "Bash(ls -la \"C:\\\\Users\\\\user\\\\Downloads\\\\ai_object_recognition_v2\")",
+      "Bash(ls -la \"C:\\\\Users\\\\user\\\\Downloads\\\\ai_teachable_machine_KNN\")"
     ]
   }
 }
