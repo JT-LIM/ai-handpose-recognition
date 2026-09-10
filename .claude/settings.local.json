@@ -5,7 +5,9 @@
       "Bash(ls -la \"C:\\\\Users\\\\user\\\\Downloads\\\\ai_object_recognition_v2\")",
       "Bash(ls -la \"C:\\\\Users\\\\user\\\\Downloads\\\\ai_teachable_machine_KNN\")",
       "Bash(git add *)",
-      "Bash(git commit -m 'Fix status-badge positioning to appear below camera instead of on the side *)"
+      "Bash(git commit -m 'Fix status-badge positioning to appear below camera instead of on the side *)",
+      "Bash(git push *)",
+      "Bash(git commit -m 'Display only Korean labels on gesture buttons *)"
     ]
   }
 }
