@@ -27,11 +27,15 @@
 
       <div class="control-group">
         <h3>👋 마퀸 조작 제스처 학습</h3>
-        <p>마퀸을 조작할 손동작을 입력하고 <strong>'학습'</strong> 버튼을 꾹 누르세요.</p>
-        <div class="input-group">
-          <input type="text" id="class-input" placeholder="예: forward, backward, left, right, stop">
-          <!-- 학습 버튼: p5.js가 생성해서 삽입 -->
-          <div id="add-data-btn-container"></div>
+        <p>아래 버튼 중 하나를 선택하고 손동작을 보여주세요. 버튼을 <strong>길게 눌러서</strong> 학습시킵니다.</p>
+
+        <!-- 제스처 선택 버튼 -->
+        <div id="gesture-buttons" class="gesture-button-group">
+          <button class="gesture-btn" id="btn-forward">⬆️ Forward<br/><span class="btn-label">앞으로</span></button>
+          <button class="gesture-btn" id="btn-backward">⬇️ Backward<br/><span class="btn-label">뒤로</span></button>
+          <button class="gesture-btn" id="btn-left">⬅️ Left<br/><span class="btn-label">왼쪽</span></button>
+          <button class="gesture-btn" id="btn-right">➡️ Right<br/><span class="btn-label">오른쪽</span></button>
+          <button class="gesture-btn" id="btn-stop">⏹️ Stop<br/><span class="btn-label">정지</span></button>
         </div>
 
         <div class="divider"></div>

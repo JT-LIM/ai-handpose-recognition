@@ -48,11 +48,10 @@ let isTracking = false;
 let lastSentLabel = ""; // 마지막으로 전송한 라벨 (변경 감지용)
 
 // === UI Elements ===
-let classInput;
 let resultLabel, resultConf, btDataDisplay;
 let trainingList, statusBadge;
-let addDataBtn;
 let connectBtn;
+let currentGestureLabel = null; // 현재 학습 중인 제스처
 
 // =============================================
 // p5.js Setup
@@ -76,42 +75,50 @@ function setup() {
 
   // DOM 요소 참조
   statusBadge   = select("#status-badge");
-  classInput    = select("#class-input");
   trainingList  = select("#training-list");
   resultLabel   = select("#result-label");
   resultConf    = select("#result-conf");
   btDataDisplay = select("#bluetooth-data-display");
 
-  // === 버튼 생성: p5.js createButton().mousePressed() 방식 ===
-  // 이 방식이어야 Chrome에서 블루투스 팝업이 즉시 뜸
-  // (p5.js 이벤트 컨텍스트 안에서 호출 → 브라우저가 "사용자 제스처"로 인정)
+  // === 제스처 버튼 설정 ===
+  const gestureLabels = ["forward", "backward", "left", "right", "stop"];
+  gestureLabels.forEach(label => {
+    const btnEl = document.getElementById(`btn-${label}`);
+    if (btnEl) {
+      // 마우스 이벤트
+      btnEl.addEventListener("mousedown", (e) => {
+        e.preventDefault();
+        currentGestureLabel = label;
+        isTraining = true;
+        btnEl.classList.add("learning");
+      });
+      btnEl.addEventListener("mouseup", (e) => {
+        e.preventDefault();
+        isTraining = false;
+        btnEl.classList.remove("learning");
+        currentGestureLabel = null;
+      });
+      btnEl.addEventListener("mouseleave", () => {
+        isTraining = false;
+        btnEl.classList.remove("learning");
+        currentGestureLabel = null;
+      });
 
-  // 학습 버튼 (꾹 누르기)
-  addDataBtn = createButton("제스처 학습 (Hold)");
-  addDataBtn.parent("add-data-btn-container");
-  addDataBtn.addClass("start-button");
-  addDataBtn.mousePressed(() => {
-    const label = classInput.value().trim();
-    const validCommands = ["forward", "backward", "left", "right", "stop"];
-    if (!validCommands.includes(label.toLowerCase())) {
-      alert("⚠️ 올바른 명령을 입력하세요:\nforward (앞으로)\nbackward (뒤로)\nleft (왼쪽)\nright (오른쪽)\nstop (정지)");
-      return;
+      // 터치 이벤트
+      btnEl.addEventListener("touchstart", (e) => {
+        e.preventDefault();
+        currentGestureLabel = label;
+        isTraining = true;
+        btnEl.classList.add("learning");
+      });
+      btnEl.addEventListener("touchend", (e) => {
+        e.preventDefault();
+        isTraining = false;
+        btnEl.classList.remove("learning");
+        currentGestureLabel = null;
+      });
     }
-    isTraining = true;
   });
-  addDataBtn.mouseReleased(() => { isTraining = false; });
-  addDataBtn.elt.addEventListener("mouseleave", () => { isTraining = false; });
-  addDataBtn.elt.addEventListener("touchstart", (e) => {
-    e.preventDefault();
-    const label = classInput.value().trim();
-    const validCommands = ["forward", "backward", "left", "right", "stop"];
-    if (!validCommands.includes(label.toLowerCase())) {
-      alert("⚠️ 올바른 명령을 입력하세요:\nforward (앞으로)\nbackward (뒤로)\nleft (왼쪽)\nright (오른쪽)\nstop (정지)");
-      return;
-    }
-    isTraining = true;
-  });
-  addDataBtn.elt.addEventListener("touchend",   (e) => { e.preventDefault(); isTraining = false; });
 
   // 초기화 버튼
   let resetBtn = createButton("🗑️ 모델 전체 초기화");
@@ -182,9 +189,8 @@ function draw() {
       if (statusBadge) statusBadge.html("⚠️ 모델 로딩 중입니다. 잠시 후 다시 시도해주세요.");
       return;
     }
-    const label = classInput.value().trim();
-    if (label && millis() - lastTrainTime > TRAIN_INTERVAL) {
-      addExample(features, label);
+    if (currentGestureLabel && millis() - lastTrainTime > TRAIN_INTERVAL) {
+      addExample(features, currentGestureLabel);
       lastTrainTime = millis();
     }
   } else if (isTracking && trainingData.length > 0) {
@@ -278,11 +284,6 @@ function euclideanDistSq(a, b) {
 }
 
 function addExample(features, label) {
-  // 방어적 안전망: 어떤 경로로든 한글 라벨이 들어오면 학습하지 않음
-  if (containsKorean(label)) {
-    console.warn("한글 라벨은 학습하지 않습니다:", label);
-    return;
-  }
   trainingData.push({ label, features });
   if (!classes[label]) classes[label] = 0;
   classes[label]++;

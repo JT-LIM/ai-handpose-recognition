@@ -54,6 +54,60 @@ button { cursor: pointer; border: none; font-size: 0.95rem; font-weight: 700; pa
 .stop-button { background-color: white; color: #EA4335; border: 1px solid #ddd; }
 .stop-button:hover { background-color: #FFF5F5; border-color: #EA4335; }
 
+/* 제스처 버튼 그룹 */
+.gesture-button-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.gesture-btn {
+  background: linear-gradient(135deg, #1a73e8 0%, #1557b0 100%);
+  color: white;
+  border: 2px solid #1a73e8;
+  padding: 12px 10px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  line-height: 1.2;
+}
+
+.gesture-btn:hover {
+  background: linear-gradient(135deg, #1557b0 0%, #0d47a1 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(26, 115, 232, 0.3);
+}
+
+.gesture-btn:active {
+  background: linear-gradient(135deg, #0d47a1 0%, #082d5e 100%);
+  transform: translateY(0);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.gesture-btn.learning {
+  background: linear-gradient(135deg, #34a853 0%, #0d7d2f 100%);
+  border-color: #34a853;
+  box-shadow: 0 0 12px rgba(52, 168, 83, 0.5);
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 12px rgba(52, 168, 83, 0.5); }
+  50% { box-shadow: 0 0 24px rgba(52, 168, 83, 0.8); }
+}
+
+.btn-label {
+  font-size: 0.7rem;
+  opacity: 0.9;
+}
+
 .input-group { display: flex; gap: 10px; margin-bottom: 10px; }
 input { flex: 1; padding: 0.8rem; border: 1px solid var(--border-color); border-radius: 8px; font-size: 1rem; outline: none; }
 input:focus { border-color: var(--primary); }
@@ -97,6 +151,10 @@ address { color: #888; font-style: normal; line-height: 1.6; }
 @media (max-width: 767px) {
   main { padding: 1.5rem; }
   .footer-top, .footer-links { flex-direction: column; gap: 2rem; }
+  .gesture-button-group {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
 }
 
 /* 세로로 긴 화면(스마트폰 세로 모드)에서 인식창이 위에 붙어 스크롤을 따라오도록 플로팅 처리 */
