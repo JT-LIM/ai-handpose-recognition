@@ -21,6 +21,8 @@ header { background: linear-gradient(135deg, #000 0%, #1a1a1a 100%); border-bott
 
 main { width: 100%; max-width: 1380px; margin: 0 auto; padding: 2.5rem 1.5rem; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2rem; }
 
+.canvas-wrapper { display: flex; flex-direction: column; align-items: center; }
+
 .canvas-container { 
     width: 100%; max-width: 320px; aspect-ratio: 4 / 3;
     border-radius: var(--radius-card); 
