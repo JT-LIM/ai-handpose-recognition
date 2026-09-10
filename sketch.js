@@ -44,7 +44,7 @@ let isTraining = false;
 let lastTrainTime = 0;
 const TRAIN_INTERVAL = 200;
 let isFlipped = true;
-let isTracking = false;
+let isTracking = true; // 앱 시작시 자동으로 인식 시작
 let lastSentLabel = ""; // 마지막으로 전송한 라벨 (변경 감지용)
 
 // === UI Elements ===
