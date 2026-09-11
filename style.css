@@ -23,6 +23,23 @@ main { width: 100%; max-width: 1380px; margin: 0 auto; padding: 2.5rem 1.5rem; f
 
 .canvas-wrapper { display: flex; flex-direction: column; align-items: center; }
 
+.recognition-result-group {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+    padding: 1.2rem 1.5rem;
+    background: var(--accent-grey);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-card);
+}
+
+.recognition-result-group h3 {
+    color: #000;
+    font-size: 1.15rem;
+    font-weight: 800;
+    margin-bottom: 0.6rem;
+}
+
 .canvas-container { 
     width: 100%; max-width: 320px; aspect-ratio: 4 / 3;
     border-radius: var(--radius-card); 

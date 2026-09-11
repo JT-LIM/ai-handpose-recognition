@@ -24,9 +24,19 @@
       <div id="status-badge" class="status-badge">모델 로딩 중...</div>
     </div>
 
+    <!-- 인식 결과: 카메라 바로 아래 -->
+    <div class="control-group recognition-result-group">
+      <h3>📊 실시간 인식 결과</h3>
+      <div class="result-box">
+        <div id="result-label" class="result-text">대기 중</div>
+        <div id="result-conf" class="result-sub">데이터 부족</div>
+      </div>
+      <div id="bluetooth-data-display" class="data-display">전송 데이터: 대기 중...</div>
+    </div>
+
     <section class="controls">
 
-      <!-- 왼쪽 컬럼: 제스처 학습 & 실시간 인식 결과 -->
+      <!-- 왼쪽 컬럼: 제스처 학습 -->
       <div class="controls-col controls-col-left">
         <div class="control-group">
           <h3>👋 마퀸 조작 제스처 학습</h3>
@@ -49,16 +59,6 @@
 
           <!-- 초기화 버튼: p5.js가 생성해서 삽입 -->
           <div id="reset-btn-container"></div>
-        </div>
-
-        <div class="control-group">
-          <h3>📊 실시간 인식 결과</h3>
-          <p>AI가 현재 손동작을 분석한 결과입니다.</p>
-          <div class="result-box">
-            <div id="result-label" class="result-text">대기 중</div>
-            <div id="result-conf" class="result-sub">데이터 부족</div>
-          </div>
-          <div id="bluetooth-data-display" class="data-display">전송 데이터: 대기 중...</div>
         </div>
       </div>
 

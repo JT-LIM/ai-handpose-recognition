@@ -8,7 +8,8 @@
       "Bash(git commit -m 'Fix status-badge positioning to appear below camera instead of on the side *)",
       "Bash(git push *)",
       "Bash(git commit -m 'Display only Korean labels on gesture buttons *)",
-      "Bash(git commit -m 'Display only device ID in Bluetooth connection status *)"
+      "Bash(git commit -m 'Display only device ID in Bluetooth connection status *)",
+      "Bash(git commit -m 'Move recognition result display below camera *)"
     ]
   }
 }
