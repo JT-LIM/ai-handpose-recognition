@@ -21,7 +21,7 @@ MediaPipe와 p5.js를 이용한 실시간 손동작 인식 웹앱입니다. 손�
 
 ## 🚀 시작하기
 
-1. **웹앱 접속**: [GitHub Pages 배포 링크](https://YOUR_USERNAME.github.io/ai-handpose-recognition)
+1. **웹앱 접속**: [GitHub Pages 배포 링크](https://jt-lim.github.io/ai-handpose-recognition/)
 2. **카메라 권한 허용** 🎥
 3. **제스처 학습**: 다음 5가지를 각각 학습시키기
    - `forward` (앞으로 가는 손동작)
@@ -32,6 +32,32 @@ MediaPipe와 p5.js를 이용한 실시간 손동작 인식 웹앱입니다. 손�
 4. **마이크로비트 연결**: "마이크로비트 연결" 버튼 클릭
 5. **마퀸 조작 시작**: "마퀸 조작 시작" 버튼 클릭
 6. **즐기기**: 학습한 손동작을 취하면 마퀸이 움직여요! 🎉
+
+## 로컬 수정 및 배포
+
+별도 패키지 설치나 빌드 없이 HTML, CSS, JavaScript를 직접 수정합니다.
+
+```sh
+make preview
+```
+
+브라우저에서 http://localhost:8000 을 열어 확인합니다. 서버는 `Ctrl+C`로 종료합니다.
+화면 구조는 `index.html`, 디자인은 `style.css`, 손 인식과 로봇 제어는 `sketch.js`에서 수정합니다.
+
+변경을 확인한 뒤 필요한 파일을 커밋하고 배포합니다.
+
+```sh
+git diff --check
+git add index.html style.css sketch.js
+git commit -m "Update handpose app"
+make deploy
+```
+
+`make deploy`는 현재 브랜치가 `main`이고 작업 폴더에 미커밋 변경이 없을 때만
+`origin/main`으로 푸시합니다. 문서나 새 파일을 변경했다면 해당 파일도 먼저 커밋하세요.
+GitHub Pages 반영에는 수 분이 걸릴 수 있습니다.
+
+배포 주소: https://jt-lim.github.io/ai-handpose-recognition/
 
 ## 📦 기술 스택
 
