@@ -21,6 +21,13 @@ header { background: linear-gradient(135deg, #000 0%, #1a1a1a 100%); border-bott
 
 main { width: 100%; max-width: 1380px; margin: 0 auto; padding: 2.5rem 1.5rem; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2rem; }
 
+.camera-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
 .canvas-wrapper { display: flex; flex-direction: column; align-items: center; }
 
 .recognition-result-group {
@@ -187,7 +194,7 @@ address { color: #888; font-style: normal; line-height: 1.6; }
   }
 }
 
-/* 데스크탑: 카메라 왼쪽 + 컨트롤(좌/우 2열) 오른쪽 배치 */
+/* 데스크탑: 카메라+인식결과(왼쪽) + 컨트롤(좌/우 2열, 오른쪽) 배치 */
 @media (min-width: 1024px) {
   main {
     flex-direction: row;
@@ -195,7 +202,9 @@ address { color: #888; font-style: normal; line-height: 1.6; }
     justify-content: center;
     gap: 2.5rem;
   }
-  .canvas-container {
+  .camera-section {
+    flex-shrink: 0;
+    width: 320px;
     position: sticky;
     top: 2rem;
   }

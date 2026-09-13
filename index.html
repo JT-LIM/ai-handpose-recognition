@@ -19,19 +19,22 @@
   </header>
 
   <main>
-    <div class="canvas-wrapper">
-      <div id="p5-container" class="canvas-container"></div>
-      <div id="status-badge" class="status-badge">모델 로딩 중...</div>
-    </div>
-
-    <!-- 인식 결과: 카메라 바로 아래 -->
-    <div class="control-group recognition-result-group">
-      <h3>📊 실시간 인식 결과</h3>
-      <div class="result-box">
-        <div id="result-label" class="result-text">대기 중</div>
-        <div id="result-conf" class="result-sub">데이터 부족</div>
+    <!-- 카메라와 인식 결과를 함께 감싸기 -->
+    <div class="camera-section">
+      <div class="canvas-wrapper">
+        <div id="p5-container" class="canvas-container"></div>
+        <div id="status-badge" class="status-badge">모델 로딩 중...</div>
       </div>
-      <div id="bluetooth-data-display" class="data-display">전송 데이터: 대기 중...</div>
+
+      <!-- 인식 결과: 카메라 바로 아래 -->
+      <div class="control-group recognition-result-group">
+        <h3>📊 실시간 인식 결과</h3>
+        <div class="result-box">
+          <div id="result-label" class="result-text">대기 중</div>
+          <div id="result-conf" class="result-sub">데이터 부족</div>
+        </div>
+        <div id="bluetooth-data-display" class="data-display">전송 데이터: 대기 중...</div>
+      </div>
     </div>
 
     <section class="controls">
