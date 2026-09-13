@@ -11,7 +11,9 @@
       "Bash(git commit -m 'Display only device ID in Bluetooth connection status *)",
       "Bash(git commit -m 'Move recognition result display below camera *)",
       "Bash(python3 -m http.server 8000 > /tmp/server.log 2>&1 &)",
-      "Bash(git commit -m 'Move recognition result below camera with proper layout structure *)"
+      "Bash(git commit -m 'Move recognition result below camera with proper layout structure *)",
+      "Bash(gh pr *)",
+      "Bash(git commit -m 'Add learning mode state management for gesture training *)"
     ]
   }
 }

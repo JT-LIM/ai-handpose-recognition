@@ -46,6 +46,7 @@ const TRAIN_INTERVAL = 200;
 let isFlipped = true;
 let isTracking = true; // 앱 시작시 자동으로 인식 시작
 let lastSentLabel = ""; // 마지막으로 전송한 라벨 (변경 감지용)
+let learningMode = true; // 학습 모드: true=학습 가능, false=기기 연결 상태
 
 // === UI Elements ===
 let resultLabel, resultConf, btDataDisplay;
@@ -88,6 +89,10 @@ function setup() {
       // 마우스 이벤트
       btnEl.addEventListener("mousedown", (e) => {
         e.preventDefault();
+        if (!learningMode) {
+          alert("⚠️ 기기가 연결되어 있습니다. 먼저 학습을 재시작하세요.");
+          return;
+        }
         currentGestureLabel = label;
         isTraining = true;
         btnEl.classList.add("learning");
@@ -107,6 +112,10 @@ function setup() {
       // 터치 이벤트
       btnEl.addEventListener("touchstart", (e) => {
         e.preventDefault();
+        if (!learningMode) {
+          alert("⚠️ 기기가 연결되어 있습니다. 먼저 학습을 재시작하세요.");
+          return;
+        }
         currentGestureLabel = label;
         isTraining = true;
         btnEl.classList.add("learning");
@@ -410,12 +419,26 @@ function deleteClass(label) {
 }
 
 function clearAllModel() {
+  // 기기 연결되어 있으면 자동으로 해제
+  if (isConnected) {
+    disconnectBluetooth();
+    console.log("학습 재시작: 블루투스 자동 연결 해제됨");
+  }
+
+  // 학습 모드 활성화
+  learningMode = true;
+
   trainingData = []; classes = {};
   updateListUI();
   if (resultLabel) {
     resultLabel.html("대기 중");
     resultLabel.style("color", "#00E676");
     resultConf.html("데이터 없음");
+  }
+
+  // 상태 메시지 업데이트
+  if (statusBadge) {
+    statusBadge.html("✅ 학습 모드 활성화! 새로운 제스처를 학습시키세요.");
   }
 }
 
@@ -447,10 +470,25 @@ async function connectBluetooth() {
     rxCharacteristic = await service.getCharacteristic(UART_RX_UUID);
     bluetoothDevice.addEventListener("gattserverdisconnected", onDisconnected);
     isConnected = true;
+
+    // 학습 모드 비활성화 (기기 연결 상태)
+    learningMode = false;
+
     // Extract device ID from brackets (e.g., "BBC micro:bit [XXXXX]" -> "XXXXX")
     const deviceId = bluetoothDevice.name.match(/\[(.*?)\]/)?.[1] || bluetoothDevice.name;
     bluetoothStatus = "연결됨: " + deviceId;
     updateBluetoothStatusUI(true);
+
+    // 상태 메시지 업데이트
+    if (statusBadge) {
+      statusBadge.html("✅ 기기 연결 완료! 마퀸 조작을 시작하세요.");
+    }
+
+    // 학습 버튼들에 시각적 피드백 제공
+    if (btDataDisplay) {
+      btDataDisplay.html("🔒 학습 비활성화 - 기기가 연결되어 있습니다");
+      btDataDisplay.style("color", "#FFA500");
+    }
   } catch (error) {
     console.error(error);
     bluetoothStatus = "연결 실패";
