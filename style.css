@@ -115,9 +115,11 @@ button { cursor: pointer; border: none; font-size: 0.95rem; font-weight: 700; pa
   cursor: pointer;
   transition: all 0.2s;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 3px;
+  justify-content: center;
+  gap: 6px;
+  white-space: nowrap;
   line-height: 1.2;
 }
 
